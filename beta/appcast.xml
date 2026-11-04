@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Nisabion Güncellemeleri (beta)</title>
+    <item>
+      <title>Nisabion 0.9.0-beta.3</title>
+      <pubDate>Tue, 03 Nov 2026 18:48:31 +0000</pubDate>
+      <sparkle:version>0.9.0-beta.3</sparkle:version>
+      <sparkle:shortVersionString>0.9.0-beta.3</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>10.0.17763</sparkle:minimumSystemVersion>
+      <enclosure url="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC/releases/download/v0.9.0-beta.3/Nisabion-Setup-x64.exe"
+                 length="57575766"
+                 type="application/octet-stream"
+                 sparkle:edSignature="vFkxp+V/NrL9XD2Yxajuw7giAJ+QIqZgtKtAeFNgMKfzJ65bMJY2yZcF+YL9Whn0HQgRsoNYsPh5EfuT3a52Bw=="/>
+    </item>
+  </channel>
+</rss>
