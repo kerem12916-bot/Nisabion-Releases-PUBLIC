@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paqnora Nisabion — PDF Studio for Windows</title>
+<meta name="description" content="Paqnora Nisabion — professional, offline-first PDF editing studio for Windows. Local, private, secure.">
+<style>
+  :root{
+    --bg: #0b0e14;
+    --bg2: #10141d;
+    --ink: #e8ecf3;
+    --ink-dim: #a7b0c0;
+    --ink-faint: #6b7486;
+    --accent: #7aa2ff;
+    --accent-soft: rgba(122,162,255,.16);
+    --glass: rgba(255,255,255,.055);
+    --glass-hi: rgba(255,255,255,.11);
+    --stroke: rgba(255,255,255,.14);
+    --stroke-hi: rgba(255,255,255,.28);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --max: 1080px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* ambient light fields */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-1;
+    background:
+      radial-gradient(900px 500px at 18% -8%, rgba(122,162,255,.10), transparent 60%),
+      radial-gradient(800px 500px at 85% 12%, rgba(150,110,255,.07), transparent 55%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);outline-offset:3px;border-radius:6px;
+  }
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    background: rgba(11,14,20,.55);
+    border-bottom:1px solid rgba(255,255,255,.07)}
+  nav .wrap{display:flex;align-items:center;gap:14px;height:58px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.02em}
+  .brand .mark{width:26px;height:26px;border-radius:8px;
+    background:linear-gradient(145deg,#8fb0ff,#5d7fe0);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 2px 8px rgba(93,127,224,.4)}
+  nav .spacer{flex:1}
+  nav .links{display:flex;gap:22px;font-size:.9rem;color:var(--ink-dim)}
+  nav .links a{color:var(--ink-dim)}
+  nav .links a:hover{color:var(--ink)}
+
+  /* hero */
+  .hero{padding:96px 0 72px;text-align:center}
+  .eyebrow{display:inline-block;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);
+    border:1px solid rgba(122,162,255,.28);
+    padding:6px 14px;border-radius:999px;margin-bottom:26px}
+  h1{font-size:clamp(2.4rem,5.5vw,3.9rem);line-height:1.12;font-weight:700;
+    letter-spacing:-.02em;margin-bottom:20px}
+  h1 .sub{color:transparent;background:linear-gradient(120deg,#cdd9f5,#8ea6d8);
+    -webkit-background-clip:text;background-clip:text}
+  .hero p.lead{max-width:640px;margin:0 auto 40px;color:var(--ink-dim);font-size:1.12rem}
+
+  /* glass */
+  .glass{
+    background: var(--glass);
+    border:1px solid var(--stroke);
+    border-radius: var(--radius);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.10),
+      inset 0 -1px 0 rgba(0,0,0,.18),
+      0 12px 40px rgba(0,0,0,.28);
+    position:relative;overflow:hidden;
+  }
+  .glass::before{ /* edge refraction hint */
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,transparent 28%,transparent 72%,rgba(255,255,255,.05) 100%);
+  }
+  .glass:hover{border-color:var(--stroke-hi)}
+
+  .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 26px;border-radius:var(--radius-sm);
+    font-weight:600;font-size:.98rem;cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{
+    background:linear-gradient(160deg,#8fb0ff,#5f80e2);
+    color:#0b0e14;border:1px solid rgba(255,255,255,.35);
+    box-shadow:0 6px 24px rgba(95,128,226,.35), inset 0 1px 0 rgba(255,255,255,.55);
+  }
+  .btn-primary:hover{box-shadow:0 10px 32px rgba(95,128,226,.5);text-decoration:none}
+  .btn-ghost{
+    background:var(--glass);color:var(--ink);border:1px solid var(--stroke);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .btn-ghost:hover{background:var(--glass-hi);text-decoration:none}
+  .ver{margin-top:18px;color:var(--ink-faint);font-size:.85rem}
+
+  /* sections */
+  section{padding:64px 0}
+  h2{font-size:1.7rem;letter-spacing:-.01em;margin-bottom:34px}
+  .grid{display:grid;gap:18px}
+  .grid.cols3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols2{grid-template-columns:repeat(2,1fr)}
+  .card{padding:26px}
+  .card h3{font-size:1.02rem;margin-bottom:8px}
+  .card p{color:var(--ink-dim);font-size:.92rem}
+  .card .ic{font-size:1.3rem;margin-bottom:12px;display:block}
+
+  .pill-list{list-style:none;display:grid;gap:12px}
+  .pill-list li{padding:14px 18px;border-radius:var(--radius-sm);
+    background:var(--glass);border:1px solid var(--stroke);
+    color:var(--ink-dim);font-size:.93rem}
+  .pill-list li strong{color:var(--ink)}
+
+  footer{border-top:1px solid rgba(255,255,255,.07);
+    padding:36px 0 48px;color:var(--ink-faint);font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+  .fade{opacity:0;transform:translateY(14px);
+    animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.25s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+  @media (max-width:760px){
+    .grid.cols3,.grid.cols2{grid-template-columns:1fr}
+    nav .links{display:none}
+    .hero{padding:64px 0 48px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="mark"></span><span>Paqnora <span style="color:var(--ink-dim);font-weight:400">Nisabion</span></span></div>
+    <div class="spacer"></div>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#limitations">Beta notes</a>
+      <a href="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC/releases">Releases</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow fade">Beta · v0.9.0-beta.3 · Windows x64</div>
+  <h1 class="fade d1">Professional PDF studio.<br><span class="sub">Local. Private. Yours.</span></h1>
+  <p class="lead fade d2">Nisabion is a native PDF editing studio for Windows that works entirely on your machine — no accounts, no cloud, no telemetry.</p>
+  <div class="cta-row fade d3">
+    <a class="btn btn-primary" href="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC/releases/download/v0.9.0-beta.3/Nisabion-Setup-x64.exe">Download for Windows</a>
+    <a class="btn btn-ghost" href="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC/releases/download/v0.9.0-beta.3/Nisabion-Portable-x64.zip">Portable ZIP</a>
+  </div>
+  <div class="ver fade d3">Installer · per-user, no admin rights · Portable runs without installation</div>
+</header>
+
+<main>
+<section id="features" class="wrap">
+  <h2>What you can do</h2>
+  <div class="grid cols3">
+    <div class="card glass"><span class="ic">✎</span><h3>Edit existing PDF text</h3><p>Open a PDF and edit existing text objects in place — with caret, selection, undo/redo and save/reopen.</p></div>
+    <div class="card glass"><span class="ic">☑</span><h3>Interactive AcroForm</h3><p>Fill text fields, checkboxes, radio groups, combo and list boxes directly inside real PDF forms.</p></div>
+    <div class="card glass"><span class="ic">▣</span><h3>BION projects</h3><p>Keep edits in a .bion project file — your source PDFs are never modified in place.</p></div>
+    <div class="card glass"><span class="ic">⎘</span><h3>Page tools</h3><p>Organize pages, insert images, export, and print — with real PDF output, not screenshots.</p></div>
+    <div class="card glass"><span class="ic">⛨</span><h3>Signed updates</h3><p>A dedicated updater verifies every package with Ed25519 signatures before anything is installed.</p></div>
+    <div class="card glass"><span class="ic">◔</span><h3>Isolated PDF engine</h3><p>Untrusted PDF parsing runs in a separate worker process, isolated from the main application.</p></div>
+  </div>
+</section>
+
+<section id="privacy" class="wrap">
+  <h2>Privacy by design</h2>
+  <div class="grid cols2">
+    <div class="card glass"><h3>Offline-first</h3><p>All document processing is local. The application and its PDF engine make no network connections — the only component with network access is the updater.</p></div>
+    <div class="card glass"><h3>No telemetry</h3><p>No analytics, no tracking, no online accounts. Your documents and personal data never leave your device.</p></div>
+  </div>
+</section>
+
+<section id="requirements" class="wrap">
+  <h2>System requirements</h2>
+  <ul class="pill-list">
+    <li><strong>OS</strong> — Windows 10 version 1809 or later, or Windows 11 (64-bit)</li>
+    <li><strong>Memory</strong> — ~4 GB RAM recommended</li>
+    <li><strong>Install</strong> — per-user installer (no administrator rights) or portable ZIP</li>
+  </ul>
+</section>
+
+<section id="limitations" class="wrap">
+  <h2>Honest beta notes</h2>
+  <ul class="pill-list">
+    <li><strong>Unsigned binaries.</strong> No Windows Authenticode signature yet — SmartScreen may warn about an unknown publisher. Update integrity is unaffected (updates are verified with Ed25519).</li>
+    <li><strong>Forms.</strong> Form filling is disabled on PDFs containing digital-signature fields or XFA content (fail-closed by design).</li>
+    <li><strong>Read-only sources.</strong> PDF tabs are read-only views; edits are committed through the editing workflow or saved into .bion projects.</li>
+    <li><strong>Beta quality.</strong> This is a beta build — feedback and issue reports are welcome on the releases repository.</li>
+  </ul>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Paqnora — Nisabion</span>
+    <span><a href="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC/releases">Releases</a> · <a href="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC">Repository</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
