@@ -3,15 +3,15 @@
   <channel>
     <title>Nisabion Güncellemeleri (beta)</title>
     <item>
-      <title>Nisabion 0.9.0-beta.4</title>
-      <pubDate>Thu, 05 Nov 2026 16:33:53 +0000</pubDate>
-      <sparkle:version>0.9.0-beta.4</sparkle:version>
-      <sparkle:shortVersionString>0.9.0-beta.4</sparkle:shortVersionString>
+      <title>Nisabion 0.9.5</title>
+      <pubDate>Mon, 16 Nov 2026 13:41:31 +0000</pubDate>
+      <sparkle:version>0.9.5</sparkle:version>
+      <sparkle:shortVersionString>0.9.5</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>10.0.17763</sparkle:minimumSystemVersion>
-      <enclosure url="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC/releases/download/v0.9.0-beta.4/Nisabion-Setup-x64.exe"
-                 length="58144584"
+      <enclosure url="https://github.com/kerem12916-bot/Nisabion-Releases-PUBLIC/releases/download/v0.9.5/Nisabion-Setup-x64.exe"
+                 length="58242892"
                  type="application/octet-stream"
-                 sparkle:edSignature="9aTG7IOO5GIGItErlBmW++aGTJSyyHO1JCfB5tbs9hWpbcnPcrD/So7MEL8Q8lhIUt619+9aPlXcywfHrAejAA=="/>
+                 sparkle:edSignature="YfZ5Qy8e5S24yv3id+F579ZhGZglYRFqCIiKaZwvn/d9dvgo6bXzFyiOiadboHuUoor4K1IQdDS2zfA9EmxbBQ=="/>
     </item>
   </channel>
 </rss>
